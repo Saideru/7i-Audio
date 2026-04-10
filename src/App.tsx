@@ -613,36 +613,33 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const sendToMessenger = () => {
-    if (!formData.name.trim()) {
-      showToast('❌ Please enter your name', true);
-      return;
-    }
-    if (!formData.contact.trim()) {
-      showToast('❌ Please enter your contact number', true);
-      return;
-    }
-    if (!formData.eventDate) {
-      showToast('❌ Please select your event date', true);
-      return;
-    }
+const sendToMessenger = () => {
+  if (!formData.name.trim()) {
+    showToast('❌ Please enter your name', true);
+    return;
+  }
+  if (!formData.contact.trim()) {
+    showToast('❌ Please enter your contact number', true);
+    return;
+  }
+  if (!formData.eventDate) {
+    showToast('❌ Please select your event date', true);
+    return;
+  }
 
-    setIsSending(true);
+  setIsSending(true);
 
-    const inquiryText = `🎤 *NEW EVENT INQUIRY - 7i AUDIO* 🎤%0A%0A👤 *Name:* ${encodeURIComponent(formData.name)}%0A📞 *Contact:* ${encodeURIComponent(formData.contact)}%0A🎉 *Event Type:* ${encodeURIComponent(formData.eventType)}%0A📅 *Event Date:* ${encodeURIComponent(formData.eventDate)}%0A📍 *Venue:* ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0A💬 *Message:* ${encodeURIComponent(formData.message || 'No additional message')}%0A%0A🙏 Please send us your quotation and availability. Thank you!`;
-
-    // CHANGE THIS LINE to your Facebook username: siedel.cabrales.5
-    const pageUsername = "siedel.cabrales.5";
-    
-    const messengerUrl = `https://m.me/${pageUsername}?text=${inquiryText}`;
-    
-    window.open(messengerUrl, '_blank');
-    
-    setTimeout(() => {
-      setIsSending(false);
-      showToast('✅ Opened in Messenger! Just review and send.', false);
-    }, 800);
-  };
+  // Create readable message
+  const message = `NEW INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent: ${encodeURIComponent(formData.eventType)}%0ADate: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'N/A')}%0AMessage: ${encodeURIComponent(formData.message || 'None')}`;
+  
+  // Direct Facebook chat link (more reliable than m.me)
+  window.open(`https://www.facebook.com/siedel.cabrales.5?sk=chat&text=${message}`, '_blank');
+  
+  setTimeout(() => {
+    setIsSending(false);
+    showToast('✅ Facebook page opened! Click Message to send inquiry.', false);
+  }, 800);
+};
 
   return (
     <section id="contact" className="py-24 bg-brand-charcoal">
