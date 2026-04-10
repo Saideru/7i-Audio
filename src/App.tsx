@@ -51,7 +51,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-charcoal/90 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#home" className="flex items-center gap-3">
-          <img src="logo.png" alt="7i Audio Logo" className="h-12 w-auto" referrerPolicy="no-referrer" />
+          <img src="/images/logo.png" alt="7i Audio Logo" className="h-12 w-auto" referrerPolicy="no-referrer" />
         </a>
 
         {/* Desktop Nav */}
@@ -175,7 +175,7 @@ const Hero = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="palmera1.png" 
+          src="/images/palmera1.png" 
           alt="Event Setup" 
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
@@ -193,7 +193,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <img src="logo.png" alt="7i Audio" className="h-32 md:h-48 mx-auto drop-shadow-[0_0_30px_rgba(232,52,26,0.3)]" referrerPolicy="no-referrer" />
+          <img src="/images/logo.png" alt="7i Audio" className="h-32 md:h-48 mx-auto drop-shadow-[0_0_30px_rgba(232,52,26,0.3)]" referrerPolicy="no-referrer" />
         </motion.div>
 
         <motion.h1 
@@ -320,7 +320,7 @@ const Portfolio = () => {
       location: 'Brgy Bitin National High School',
       date: 'March 30, 2026',
       desc: 'Full PA system and projection setup for school graduation ceremony',
-      images: ['graduation1.png', 'graduation2.png', 'graduation3.png'],
+      images: ['/images/graduation1.png', '/images/graduation2.png', '/images/graduation3.png'],
       icon: '🎓'
     },
     {
@@ -328,7 +328,7 @@ const Portfolio = () => {
       location: "Palmera's Garden Restaurant, San Pablo City",
       date: 'February 14, 2026',
       desc: 'Complete lights, sounds, and DJ setup for an elegant 70th birthday celebration',
-      images: ['palmera2.png', 'palmera3.png', 'palmera1.png'],
+      images: ['/images/palmera2.png', '/images/palmera3.png', '/images/palmera1.png'],
       icon: '🎂'
     },
     {
@@ -336,7 +336,7 @@ const Portfolio = () => {
       location: "Carlito's Resort",
       date: 'August 9, 2025',
       desc: 'Sound system and LED lights for a vibrant forest-themed 1st birthday celebration',
-      images: ['vyco1.png', 'vyco2.png', 'vyco3.png'],
+      images: ['/images/vyco1.png', '/images/vyco2.png', '/images/vyco3.png'],
       icon: '🎈'
     }
   ];
@@ -510,7 +510,7 @@ const AboutUs = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-brand opacity-20 blur-2xl rounded-full"></div>
               <img 
-                src="1775815897023_image.png" 
+                src="/images/1775815897023_image.png" 
                 alt="7i Audio Flyer" 
                 className="relative z-10 w-full rounded-2xl shadow-2xl border border-white/10"
                 referrerPolicy="no-referrer"
@@ -698,7 +698,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-12 mb-12">
           <div className="text-center md:text-left">
-            <img src="logo.png" alt="7i Audio" className="h-16 mx-auto md:mx-0 mb-4" referrerPolicy="no-referrer" />
+            <img src="/images/logo.png" alt="7i Audio" className="h-16 mx-auto md:mx-0 mb-4" referrerPolicy="no-referrer" />
             <p className="text-gray-500 max-w-xs">Making Every Event Memorable Through Sound 🎵</p>
           </div>
           
