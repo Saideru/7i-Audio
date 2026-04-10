@@ -629,30 +629,23 @@ const sendToMessenger = () => {
 
   setIsSending(true);
 
-  // Create the message (properly encoded for URL)
-  const message = `NEW EVENT INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent Type: ${encodeURIComponent(formData.eventType)}%0AEvent Date: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0AMessage: ${encodeURIComponent(formData.message || 'No additional message')}`;
+  // Create readable message
+  const message = `NEW EVENT INQUIRY - 7i AUDIO\n\nName: ${formData.name}\nContact: ${formData.contact}\nEvent Type: ${formData.eventType}\nEvent Date: ${formData.eventDate}\nVenue: ${formData.venue || 'Not specified'}\n\nMessage: ${formData.message || 'No additional message'}`;
   
-  // This opens Messenger with the message pre-filled (just need to press Send)
-  // Using fb-messenger:// protocol for mobile, and web fallback
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
-  if (isMobile) {
-    // Mobile - opens Messenger app directly
-    window.location.href = `fb-messenger://share?link=${encodeURIComponent('https://www.facebook.com/siedel.cabrales.5')}&text=${message}`;
+  // Copy to clipboard
+  navigator.clipboard.writeText(message).then(() => {
+    // Just open your Facebook profile page
+    window.open('https://www.facebook.com/siedel.cabrales.5', '_blank');
+    
     setTimeout(() => {
       setIsSending(false);
-      showToast('✅ Opening Messenger app...', false);
-    }, 500);
-  } else {
-    // Desktop - opens Facebook chat with pre-filled message
-    window.open(`https://www.facebook.com/messages/t/siedel.cabrales.5?text=${message}`, '_blank');
-    setTimeout(() => {
-      setIsSending(false);
-      showToast('✅ Messenger opened! Press Send to submit inquiry.', false);
+      showToast('📋 Message copied! Go to Facebook, paste (Ctrl+V), and send.', false);
     }, 800);
-  }
-};
-  return (
+  }).catch(() => {
+    setIsSending(false);
+    showToast('❌ Please message us directly on Facebook: siedel.cabrales.5', true);
+  });
+};  return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
