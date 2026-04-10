@@ -487,7 +487,7 @@ const AboutUs = () => {
           <div className="w-full lg:w-1/2">
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-8">ABOUT 7i AUDIO 🎵</h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-10">
-              7i Audio was established in October 2022 with a passion for delivering high-quality audio and event solutions. Founded by Winis Reyes, together with his sons Jan Win Renald Reyes and John Fredrick Reyes, the business is built on family values, dedication, and a shared love for sound and event production.
+              7i Audio was established in October 2022 with a passion for delivering high-quality audio and event solutions. Founded by Winis Reyes, together with his sons John Fredrick Reyes and Jan Win Renald Reyes, the business is built on family values, dedication, and a shared love for sound and event production.
             </p>
             <p className="text-lg text-gray-300 leading-relaxed mb-10">
               From small gatherings to large celebrations, 7i Audio aims to provide reliable, professional, and immersive audio experiences. With a hands-on approach and attention to detail, the team ensures every event is enhanced with clear sound, proper setup, and smooth execution. As a growing family-run business, 7i Audio continues to improve its services, invest in quality equipment, and prioritize customer satisfaction — making every event memorable through sound.
