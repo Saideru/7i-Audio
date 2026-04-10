@@ -629,18 +629,23 @@ const sendToMessenger = () => {
 
   setIsSending(true);
 
-  // Create readable message
-  const message = `NEW INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent: ${encodeURIComponent(formData.eventType)}%0ADate: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'N/A')}%0AMessage: ${encodeURIComponent(formData.message || 'None')}`;
+  // Create the message text
+  const message = `NEW EVENT INQUIRY - 7i AUDIO\n\nName: ${formData.name}\nContact: ${formData.contact}\nEvent Type: ${formData.eventType}\nEvent Date: ${formData.eventDate}\nVenue: ${formData.venue || 'Not specified'}\n\nMessage: ${formData.message || 'No additional message'}`;
   
-  // Direct Facebook chat link (more reliable than m.me)
-  window.open(`https://www.facebook.com/siedel.cabrales.5?sk=chat&text=${message}`, '_blank');
-  
-  setTimeout(() => {
+  // Copy to clipboard
+  navigator.clipboard.writeText(message).then(() => {
+    // Open Facebook page in new tab
+    window.open('https://www.facebook.com/siedel.cabrales.5', '_blank');
+    
+    setTimeout(() => {
+      setIsSending(false);
+      showToast('✅ Message copied! Paste it in Facebook Messenger.', false);
+    }, 800);
+  }).catch(() => {
     setIsSending(false);
-    showToast('✅ Facebook page opened! Click Message to send inquiry.', false);
-  }, 800);
-};
-
+    showToast('❌ Could not copy. Please message us directly on Facebook.', true);
+  });
+};  
   return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
