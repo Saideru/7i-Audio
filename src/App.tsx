@@ -627,25 +627,16 @@ const sendToMessenger = () => {
     return;
   }
 
-  setIsSending(true);
-
-  // Create readable message
+  // Create message
   const message = `NEW EVENT INQUIRY - 7i AUDIO\n\nName: ${formData.name}\nContact: ${formData.contact}\nEvent Type: ${formData.eventType}\nEvent Date: ${formData.eventDate}\nVenue: ${formData.venue || 'Not specified'}\n\nMessage: ${formData.message || 'No additional message'}`;
   
-  // Copy to clipboard
-  navigator.clipboard.writeText(message).then(() => {
-    // Just open your Facebook profile page
-    window.open('https://www.facebook.com/siedel.cabrales.5', '_blank');
-    
-    setTimeout(() => {
-      setIsSending(false);
-      showToast('📋 Message copied! Go to Facebook, paste (Ctrl+V), and send.', false);
-    }, 800);
-  }).catch(() => {
-    setIsSending(false);
-    showToast('❌ Please message us directly on Facebook: siedel.cabrales.5', true);
-  });
-};  return (
+  // Show message in alert for easy copying
+  alert(`Please copy this message and send it to us on Facebook:\n\n${message}\n\nThen click OK to go to our Facebook page.`);
+  
+  window.open('https://www.facebook.com/siedel.cabrales.5', '_blank');
+  showToast('✅ Facebook page opened! Send us the message above.', false);
+}; 
+  return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
