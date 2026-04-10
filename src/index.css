@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Rajdhani", sans-serif;
+  --font-display: "Orbitron", sans-serif;
+  --font-body: "Poppins", sans-serif;
+
+  --color-brand-charcoal: #1A1A1A;
+  --color-brand-maroon: #4A0E2E;
+  --color-brand-red: #E8341A;
+  --color-brand-orange: #F5832A;
+  --color-brand-gold: #F5C842;
+  --color-brand-cyan: #00D4FF;
+  --color-brand-lavender: #B39DDB;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-charcoal text-white font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase tracking-wider;
+  }
+}
+
+@layer utilities {
+  .text-glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.4);
+  }
+  
+  .text-glow-gold {
+    text-shadow: 0 0 10px rgba(245, 200, 66, 0.8), 0 0 20px rgba(245, 200, 66, 0.4);
+  }
+
+  .border-glow-cyan {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  }
+
+  .border-glow-gold {
+    box-shadow: 0 0 15px rgba(245, 200, 66, 0.3);
+  }
+  
+  .bg-gradient-brand {
+    @apply bg-gradient-to-r from-brand-red to-brand-orange;
+  }
+}
+
+/* Custom soundwave animation */
+@keyframes soundwave {
+  0%, 100% { height: 10px; }
+  50% { height: 40px; }
+}
+
+.soundwave-bar {
+  animation: soundwave 1s ease-in-out infinite;
+}
