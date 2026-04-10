@@ -510,7 +510,7 @@ const AboutUs = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-brand opacity-20 blur-2xl rounded-full"></div>
               <img 
-                src="/images/1775815897023_image.png" 
+                src="/images/flyer.png" 
                 alt="7i Audio Flyer" 
                 className="relative z-10 w-full rounded-2xl shadow-2xl border border-white/10"
                 referrerPolicy="no-referrer"
