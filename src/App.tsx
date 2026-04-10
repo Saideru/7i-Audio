@@ -593,6 +593,57 @@ const Testimonials = () => {
 };
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    contact: '',
+    eventType: 'Birthday',
+    eventDate: '',
+    venue: '',
+    message: ''
+  });
+  const [isSending, setIsSending] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (msg, isError = false) => {
+    setToastMessage({ text: msg, error: isError });
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const sendToMessenger = () => {
+    if (!formData.name.trim()) {
+      showToast('❌ Please enter your name', true);
+      return;
+    }
+    if (!formData.contact.trim()) {
+      showToast('❌ Please enter your contact number', true);
+      return;
+    }
+    if (!formData.eventDate) {
+      showToast('❌ Please select your event date', true);
+      return;
+    }
+
+    setIsSending(true);
+
+    const inquiryText = `🎤 *NEW EVENT INQUIRY - 7i AUDIO* 🎤%0A%0A👤 *Name:* ${encodeURIComponent(formData.name)}%0A📞 *Contact:* ${encodeURIComponent(formData.contact)}%0A🎉 *Event Type:* ${encodeURIComponent(formData.eventType)}%0A📅 *Event Date:* ${encodeURIComponent(formData.eventDate)}%0A📍 *Venue:* ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0A💬 *Message:* ${encodeURIComponent(formData.message || 'No additional message')}%0A%0A🙏 Please send us your quotation and availability. Thank you!`;
+
+    // CHANGE THIS LINE to your Facebook username: siedel.cabrales.5
+    const pageUsername = "siedel.cabrales.5";
+    
+    const messengerUrl = `https://m.me/${pageUsername}?text=${inquiryText}`;
+    
+    window.open(messengerUrl, '_blank');
+    
+    setTimeout(() => {
+      setIsSending(false);
+      showToast('✅ Opened in Messenger! Just review and send.', false);
+    }, 800);
+  };
+
   return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
@@ -640,21 +691,40 @@ const Contact = () => {
           </div>
 
           <div className="w-full lg:w-2/3">
-            <form className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-6">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Name</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" placeholder="Your Name" />
+                  <label className="text-sm font-medium text-gray-400">Name *</label>
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" 
+                    placeholder="Your Name" 
+                  />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Contact Number</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" placeholder="09XX XXX XXXX" />
+                  <label className="text-sm font-medium text-gray-400">Contact Number *</label>
+                  <input 
+                    type="text" 
+                    name="contact"
+                    value={formData.contact}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" 
+                    placeholder="09XX XXX XXXX" 
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-400">Event Type</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors appearance-none">
+                  <select 
+                    name="eventType"
+                    value={formData.eventType}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors appearance-none"
+                  >
                     <option className="bg-brand-charcoal">Birthday</option>
                     <option className="bg-brand-charcoal">Debut</option>
                     <option className="bg-brand-charcoal">Wedding</option>
@@ -665,33 +735,72 @@ const Contact = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-400">Event Date</label>
-                  <input type="date" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" />
+                  <label className="text-sm font-medium text-gray-400">Event Date *</label>
+                  <input 
+                    type="date" 
+                    name="eventDate"
+                    value={formData.eventDate}
+                    onChange={handleChange}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" 
+                  />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-400">Venue/Location</label>
-                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" placeholder="Event Venue" />
+                <input 
+                  type="text" 
+                  name="venue"
+                  value={formData.venue}
+                  onChange={handleChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" 
+                  placeholder="Event Venue" 
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-400">Message</label>
-                <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" placeholder="Tell us more about your event..."></textarea>
+                <textarea 
+                  rows={4} 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-brand-cyan outline-none transition-colors" 
+                  placeholder="Tell us more about your event..."
+                ></textarea>
               </div>
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-gradient-brand py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-[0_0_20px_rgba(232,52,26,0.4)] transition-all animate-pulse"
+                onClick={sendToMessenger}
+                disabled={isSending}
+                className="w-full bg-gradient-brand py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-[0_0_20px_rgba(232,52,26,0.4)] transition-all flex items-center justify-center gap-2"
               >
-                Send Inquiry 🚀
+                {isSending ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Opening Messenger...
+                  </>
+                ) : (
+                  <>Send Inquiry 🚀</>
+                )}
               </motion.button>
-            </form>
+              <p className="text-xs text-center text-gray-500 mt-2">
+                💬 Your inquiry will open in Facebook Messenger — just review and send!
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
+      {toastMessage && (
+        <div className={`fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-full text-sm font-bold shadow-2xl backdrop-blur-md transition-all ${
+          toastMessage.error ? 'bg-red-600/90 text-white' : 'bg-green-600/90 text-white'
+        }`}>
+          {toastMessage.text}
+        </div>
+      )}
     </section>
   );
 };
-
 const Footer = () => {
   return (
     <footer className="bg-[#050505] py-16 border-t border-white/5">
