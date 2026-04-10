@@ -627,15 +627,22 @@ const sendToMessenger = () => {
     return;
   }
 
-  // Create message
-  const message = `NEW EVENT INQUIRY - 7i AUDIO\n\nName: ${formData.name}\nContact: ${formData.contact}\nEvent Type: ${formData.eventType}\nEvent Date: ${formData.eventDate}\nVenue: ${formData.venue || 'Not specified'}\n\nMessage: ${formData.message || 'No additional message'}`;
+  setIsSending(true);
+
+  // Create the message (properly encoded for URL)
+  const message = `NEW EVENT INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent Type: ${encodeURIComponent(formData.eventType)}%0AEvent Date: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0AMessage: ${encodeURIComponent(formData.message || 'No additional message')}`;
   
-  // Show message in alert for easy copying
-  alert(`Please copy this message and send it to us on Facebook:\n\n${message}\n\nThen click OK to go to our Facebook page.`);
+  // YOUR FACEBOOK PAGE ID - THIS IS CORRECT!
+  const pageId = "61562601014233";
   
-  window.open('https://www.facebook.com/siedel.cabrales.5', '_blank');
-  showToast('✅ Facebook page opened! Send us the message above.', false);
-}; 
+  // Open Messenger chat with your Page (pre-filled message)
+  window.open(`https://www.facebook.com/messages/t/${pageId}?text=${message}`, '_blank');
+  
+  setTimeout(() => {
+    setIsSending(false);
+    showToast('✅ Messenger opened! Press Send to submit inquiry.', false);
+  }, 800);
+};
   return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
