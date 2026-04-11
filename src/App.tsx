@@ -22,9 +22,9 @@ import {
   Users,
   DollarSign,
   Zap,
-  Speaker,
-  Menu as MenuIcon
+  Speaker
 } from 'lucide-react';
+
 // --- Components ---
 
 const Navbar = () => {
@@ -41,48 +41,41 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'Menu', href: '#menu' },
-    { name: 'About', href: '#about' },
-    { name: 'Pet-Friendly', href: '#pet-friendly' },
-    { name: 'Visit Us', href: '#visit' },
+    { name: 'Services', href: '#services' },
+    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'About Us', href: '#about' },
+    { name: 'Contact', href: '#contact' },
   ];
 
-  // Function to open Facebook Messenger with pre-filled reservation message
-  const openReservation = () => {
-    const message = `Hello! I'd like to make a reservation at ÍGNEO Café.%0A%0A👤 *Name:* %0A👥 *Number of Guests:* %0A📅 *Date:* %0A⏰ *Time:* %0A📞 *Contact Number:* %0A💬 *Special Requests:* %0A%0AThank you! 🔥`;
-    
-    // Your Facebook Page ID for Igneo Cafe
-    const pageId = "61579029898471";
-    
-    window.open(`https://www.facebook.com/messages/t/${pageId}?text=${message}`, '_blank');
-  };
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-crimson/90 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-6'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#home" className="flex items-center gap-3 group">
-          <img src={IMAGES.BRAND.LOGO} alt="Igneo Logo" className="h-12 w-12 object-contain group-hover:scale-110 transition-transform" referrerPolicy="no-referrer" />
-          <span className="bebas text-2xl tracking-widest text-cream hidden sm:block">ÍGNEO</span>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-brand-charcoal/90 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-5'}`}>
+      <div className="container mx-auto px-6 flex justify-between items-center">
+        <a href="#home" className="flex items-center gap-3">
+          <img src="/images/logo.png" alt="7i Audio Logo" className="h-12 w-auto" referrerPolicy="no-referrer" />
         </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="text-sm font-medium uppercase tracking-widest hover:text-amber transition-colors">
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className="text-sm font-medium hover:text-brand-cyan transition-colors uppercase tracking-widest"
+            >
               {link.name}
             </a>
           ))}
-          <button 
-            onClick={openReservation}
-            className="bg-amber text-crimson px-6 py-2 rounded-full bebas text-lg tracking-wider hover:bg-orange hover:text-cream transition-all animate-pulse-glow"
+          <a 
+            href="#contact" 
+            className="bg-gradient-brand px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2"
           >
-            Reserve a Table
-          </button>
+            Book Now <Phone size={16} />
+          </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-cream" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X size={28} /> : <MenuIcon size={28} />}
+        {/* Mobile Menu Toggle */}
+        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
@@ -93,27 +86,25 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-crimson border-t border-cream/10 p-6 flex flex-col gap-4 md:hidden"
+            className="absolute top-full left-0 w-full bg-brand-charcoal border-t border-white/10 py-6 px-6 flex flex-col gap-4 md:hidden"
           >
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href} 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg font-medium uppercase tracking-widest border-b border-cream/5 pb-2"
+                className="text-lg font-medium hover:text-brand-cyan transition-colors uppercase tracking-widest"
               >
                 {link.name}
               </a>
             ))}
-            <button 
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                openReservation();
-              }}
-              className="bg-amber text-crimson px-6 py-3 rounded-full bebas text-xl tracking-wider mt-4"
+            <a 
+              href="#contact" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="bg-gradient-brand px-6 py-3 rounded-full text-center font-bold shadow-lg"
             >
-              Reserve a Table
-            </button>
+              Book Now 📞
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
