@@ -22,9 +22,9 @@ import {
   Users,
   DollarSign,
   Zap,
-  Speaker
+  Speaker,
+  Menu as MenuIcon
 } from 'lucide-react';
-
 // --- Components ---
 
 const Navbar = () => {
