@@ -629,20 +629,19 @@ const sendToMessenger = () => {
 
   setIsSending(true);
 
-  // Create the message (properly encoded for URL)
+  // Create the message
   const message = `NEW EVENT INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent Type: ${encodeURIComponent(formData.eventType)}%0AEvent Date: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0AMessage: ${encodeURIComponent(formData.message || 'No additional message')}`;
   
-  // YOUR FACEBOOK PAGE ID - THIS IS CORRECT!
   const pageId = "61562601014233";
   
-  // Open Messenger chat with your Page (pre-filled message)
-  window.open(`https://www.facebook.com/messages/t/${pageId}?text=${message}`, '_blank');
+  // BEST for both PC and Mobile: Use m.me link (works everywhere)
+  window.location.href = `https://m.me/${pageId}?text=${message}`;
   
   setTimeout(() => {
     setIsSending(false);
-    showToast('✅ Messenger opened! Press Send to submit inquiry.', false);
-  }, 800);
-};
+    showToast('✅ Redirecting to Messenger...', false);
+  }, 500);
+}; 
   return (
     <section id="contact" className="py-24 bg-brand-charcoal">
       <div className="container mx-auto px-6">
