@@ -633,9 +633,10 @@ const sendToMessenger = () => {
   const message = `NEW EVENT INQUIRY - 7i AUDIO%0A%0AName: ${encodeURIComponent(formData.name)}%0AContact: ${encodeURIComponent(formData.contact)}%0AEvent Type: ${encodeURIComponent(formData.eventType)}%0AEvent Date: ${encodeURIComponent(formData.eventDate)}%0AVenue: ${encodeURIComponent(formData.venue || 'Not specified')}%0A%0AMessage: ${encodeURIComponent(formData.message || 'No additional message')}`;
   
   
-  // BEST for both PC and Mobile: Use m.me link (works everywhere)
-  window.location.href = `https://www.messenger.com/e2ee/t/30301050372841551?text=${message}`;
+  const pageId = "61562601014233";
   
+  // BEST for both PC and Mobile: Use m.me link (works everywhere)
+  window.location.href = `https://m.me/${pageId}?text=${message}`;
   setTimeout(() => {
     setIsSending(false);
     showToast('✅ Redirecting to Messenger...', false);
